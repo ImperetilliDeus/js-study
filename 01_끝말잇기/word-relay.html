@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>끝말잇기</title>
+</head>
+<body>
+    <div>
+        <span id="order">1</span>번째 참가자
+    </div>
+    <div>제시어 : <span id="word"></span></div>
+    <input type="text">
+    <button>입력</button>
+
+    <script>
+        // prompt는 문자열 타입의 값을 반환하기 때문에 숫자로 형변환
+        const number = Number(prompt("몇 명이 참가하나요?"));
+
+        const $input = document.querySelector('input');
+        const $button = document.querySelector('button');
+        const $word = document.querySelector('#word');
+
+        let word; // 제시어
+        let newWord; // 사용자가 입력한 단어
+        
+        const onClickButton=()=>{
+            if(!word){ // 제시어가 비어 있다면
+                word=newWord; // 사용자가 입력한 단어가 제시어가 된다
+
+                // 태그 내부의 값을 얻거나 수정할 때 textContent
+                // 화면에 제시어 표시
+                $word.textContent = word;
+            }else{ // 제시어가 비어있지 않다면
+                // 제시어의 마지막 글자와 사용자가 입력한 단어의 첫 글자가 같은지 비교
+                if(word[word.length-1]===newWord[0]){
+                    // 같다면
+                    word=newWord;
+                    $word.textContent = word;
+                }else{
+                    // 다르다면
+                }
+            }
+            console.log("버튼을 누르셨어요")
+        }
+        
+        const inputText=(event)=>{
+            newWord = event.target.value;
+        }
+
+        $button.addEventListener('click',onClickButton);
+        $input.addEventListener('input',inputText);
+
+        console.dir($input)
+
+
+    </script>
+</body>
+</html>
